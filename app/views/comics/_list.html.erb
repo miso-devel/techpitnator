@@ -1,0 +1,15 @@
+<div class="grid grid-cols-4"> 
+<% Comic.all.each do | comic | %>
+    <div class="p-5 m-3 text-center shadow-xl">
+        <p class="py-3 font-bold"><%= comic.title %></p>
+        <br>
+        <p><%= comic.genre %></p>
+        <br>
+        <p><%= comic.publisher %></p>
+        <br>
+        <p><%= comic.serialization_started_year %> ~ <%= comic.serialization_end_year %></p>
+    </div>
+
+      <% end %>
+</div>
+     

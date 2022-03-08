@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+.my-shadows {
+  border-radius: 11px;
+  background: #ffffff;
+  box-shadow: 20px 20px 37px #b8b8b8, -20px -20px 37px #ffffff;
+}
