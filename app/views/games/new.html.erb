@@ -1,12 +1,20 @@
-<div>
-  <p class="text-center">あなたが思った漫画を当ててみせましょう！</p>
+<div class="text-center">
+  <p>あなたが思った漫画を当ててみせましょう！</p>
+  <p>下記漫画から一つを頭に思い描いてください。</p>
+  <p>準備ができたらゲームをはじめてください。</p>
+  <%= form_with url: games_path, local:true do |f| %>
+    <div class="grid grid-cols-1 my-5">
+      <div class="">
+        <%= f.submit "はじめる", {class: 'border-black p-3 border-solid border-y-2 border-x-2'} %>
+      </div>
+   </div>
+  <% end %>
+
   <div class="text-center py-5">
   <button class="border-black p-3 border-solid border-y-2 border-x-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
    漫画候補一覧はこちら
   </button>
   </div>
-
-
   <%= render partial: "comics/list" %>
 </div>
 
