@@ -1,0 +1,27 @@
+<div class="text-center">
+ <p>質問</p>
+ <p><%= @question.content %></p>
+</div>
+<div class="shadow-2xl justify-center m-20 p-10 grid grid-cols-1 text-center">
+ <%= form_with model: @progress, url: game_progresses_path, local:true do |f| %>
+    <%= f.hidden_field :question_id, :value => @question.id %>
+    <div class="inline-block text-left">
+        <div>
+          <%= f.radio_button :answer, :positive %>
+          <%= f.label :answer_positive, "はい" %>
+        </div>
+        <div>
+          <%= f.radio_button :answer, :unknown %>
+          <%= f.label :answer_unknown, "わからない" %>
+        </div>
+        <div>
+          <%= f.radio_button :answer, :negative %>
+          <%= f.label :answer_negative, "いいえ" %>
+        </div>
+      <div class="my-5">
+        <%= f.submit("回答を送信", class:"btn btn-lg btn btn-outline-info btn-block") %>
+      </div>
+    </div>
+</div>
+
+  <% end %>

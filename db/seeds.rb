@@ -252,8 +252,34 @@ when '2'
       publisher: '漫画アクション',
     },
   ]
+when '3'
+  comics = [
+    {
+      title: 'ワンピース ONE PIECE',
+      genre: '少年漫画 海賊 冒険ファンタジー バトル',
+      serialization_started_year: 1997,
+      serialization_end_year: nil,
+      publisher: '週刊少年ジャンプ',
+    },
+  ]
+
+  questions = [
+    {
+      content: '連載は週刊少年ジャンプ？',
+      algorithm: 'publisher_match',
+      eval_value: '週刊少年ジャンプ',
+    },
+    {
+      content: '海賊が関係してますか？',
+      algorithm: 'genre_match',
+      eval_value: '海賊',
+    },
+  ]
 end
+
 comics.each { |comic| Comic.create!(comic) } if comics.present?
+
+questions.each { |question| Question.create!(question) } if questions.present?
 
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)

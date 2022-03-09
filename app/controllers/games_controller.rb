@@ -1,8 +1,8 @@
 class GamesController < ApplicationController
   def new; end
   def create
-    Game.create!(status: 'in_progress')
-    redirect_to(games_test_path)
+    game = Game.create!(status: 'in_progress')
+    redirect_to new_game_progresses_path(game)
   end
   def test; end
 end
