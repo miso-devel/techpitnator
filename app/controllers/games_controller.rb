@@ -4,5 +4,7 @@ class GamesController < ApplicationController
     game = Game.create!(status: 'in_progress')
     redirect_to new_game_progresses_path(game)
   end
+  def give_up; end
+
   def test; end
 end
