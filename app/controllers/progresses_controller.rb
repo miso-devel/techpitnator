@@ -16,16 +16,30 @@ class ProgressesController < ApplicationController
     progress.assign_sequence
     progress.save!
 
-    next_question = Question.next_question(current_game)
-    if next_question.blank?
-      current_game.status = 'finished'
-      current_game.result = 'incorrect'
-      current_game.save!
+    # 絞り込み
+    @extract_comics = ExtractionAlgorithm.new(current_game).compute
+
+    if @extract_comics.count == 0
       redirect_to give_up_game_path(current_game)
       return
-    end
+    elsif @extract_comics.count == 1
+      redirect_to challenge_game_path(current_game)
+      return
+    else
+      next_question = Question.next_question(current_game)
 
-    redirect_to new_game_progresses_path(current_game)
+      # 次の質問がないと終わる
+      if next_question.blank?
+        current_game.status = 'finished'
+        current_game.result = 'incorrect'
+        current_game.save!
+        redirect_to give_up_game_path(current_game)
+        return
+      end
+
+      # 次の質問へ行く
+      redirect_to new_game_progresses_path(current_game)
+    end
   end
 
   private

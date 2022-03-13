@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   root 'games#new'
   get 'games/test'
-  resources :games, only: %i[new create] do
-    member { get :give_up }
+  resources :games, only: %i[new create update] do
+    member do
+      get :give_up
+      get :challenge
+      get :correct
+    end
     resource :progresses, only: %i[new create]
   end
 end

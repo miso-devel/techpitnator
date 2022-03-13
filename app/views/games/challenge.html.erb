@@ -1,0 +1,22 @@
+
+  <%= form_with url: game_path, method: :patch, local:true do |f| %>
+
+<div class="grid grid-cols-1 text-center">
+<p>あなたがイメージした漫画はこれですね？</p>
+<div class="card-body">
+    <p class="card-text"><%= @comic.title %></p>
+    <div class=" grid grid-cols-2">
+        <%= f.submit("違います", name: :incorrect, class: "") %>
+        <%= f.submit("正解です", name: :correct, class: "") %></div>
+</div>
+</div>
+
+
+
+  
+
+
+
+<% end %>
+
+
