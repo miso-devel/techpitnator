@@ -29,9 +29,7 @@ class ExtractionAlgorithm
       # progress.question.eval_valueを含んでいるもの
       @query =
         @query.where('comics.genre like ?', "%#{progress.question.eval_value}%")
-    end
-
-    if progress.negative_answer?
+    elsif progress.negative_answer?
       # progress.question.eval_valueを含んでいないもの
       @query =
         @query.where.not(
@@ -40,12 +38,30 @@ class ExtractionAlgorithm
         )
     end
   end
+  # 絞り込みメソッド(出版社)
+  def publisher_match(progress)
+    if progress.positive_answer?
+      @query =
+        @query.where(
+          'comics.publisher like ?',
+          "%#{progress.question.eval_value}%",
+        )
+    end
+
+    if progress.negative_answer?
+      @query =
+        @query.where.not(
+          'comics.publisher like ?',
+          "%#{progress.question.eval_value}%",
+        )
+    end
+  end
 
   def compute
     # gameはprogressesは1対Nでリレーションされている
     progresses = @game.progresses
+
     progresses.each do |progress|
-      # question
       question = progress.question
 
       case question.algorithm
@@ -53,6 +69,8 @@ class ExtractionAlgorithm
         serialization_end?(progress)
       when 'genre_match'
         genre_match(progress)
+      when 'publisher_match'
+        publisher_match(progress)
       else
         # 例外処理
         raise Exception.new('Invalid algorithm. --> ' + question.algorithm.to_s)
