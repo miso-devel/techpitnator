@@ -10,6 +10,7 @@ class ProgressesController < ApplicationController
     current_game = Game.find(params[:game_id])
 
     #(create_params)で許可された値のみでProgressモデルのインスタンス作成
+    # current_gameからgame_idを取ってきてる、かつcreate_paramsでanswerとquestion_idを入れている
     progress = current_game.progresses.new(create_params)
 
     #モデルにassign_sequenceメソッドについて書いてある
